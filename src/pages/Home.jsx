@@ -1,16 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getProductsThunk } from '../store/slices/products.slice';
+import { getProductsThunk, filterCategoriesThunk } from '../store/slices/products.slice';
 import {Row, Col, Button, Card} from 'react-bootstrap'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 const Home = () => {
 
     const dispatch = useDispatch()
     const products = useSelector(state => state.product)
+    const [categorie, setCategorie] =useState([])
 
     useEffect(() => {
+
+      axios
+      .get(`https://e-commerce-api.academlo.tech/api/v1/products/categories`)
+      .then(resp => setCategorie(resp.data.data.categories))
+      .then (error => console.log(error))
 
       dispatch(getProductsThunk())
 
@@ -19,6 +26,16 @@ const Home = () => {
   return (
     <div>
       <h1>Home</h1>
+
+      {
+        categorie.map(category => (
+          <button key={category.id}
+          variant="primary"
+          onClick={() => dispatch(filterCategoriesThunk(category.id))}
+          >{category.name}</button>
+        ))
+      }
+      <button variant="danger" onClick={() => dispatch(getProductsThunk())}>Ver Todo</button>
       <Row xs={1} md={2} lg={3}>
         {
           products.map((product, index) => (
