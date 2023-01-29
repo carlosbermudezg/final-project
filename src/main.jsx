@@ -1,4 +1,4 @@
-import 'bootswatch/dist/lux/bootstrap.min.css'; // Added this :boom:
+import 'bootswatch/dist/journal/bootstrap.min.css'; // Added this :boom:
 import './index.css'
 import React from 'react';
 import ReactDOM from 'react-dom/client';

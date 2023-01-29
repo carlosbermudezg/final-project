@@ -1,6 +1,10 @@
 :root {
   --primary--color: #ffffff;
-  --secondary--color: #F85555;
+  --secondary--color: #f85555;
+  --tertiary--color: #dcd9d9;
+  --text--gray:##ababab;
+  --text--color: #515151;
+    
 }
 
 * {
@@ -12,4 +16,11 @@
 
 body{
   background-color: var(--primary--color);
+  color: var(--text--color);
+  font-family: Yantramanav,sans-serif;
+  font-size: 1rem;
+}
+
+h1, h2, h3 ,h4,h5,h6 {
+  font-family: Yantramanav,sans-serif;
 }
