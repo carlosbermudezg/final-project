@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
 import { setIsLoading } from '../store/slices/isLoading.slice';
 import Carousel from 'react-bootstrap/Carousel';
 import Container from 'react-bootstrap/Container';
@@ -9,13 +8,15 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+// thunk
+import { useDispatch, useSelector } from 'react-redux';
+import { getProductsThunk } from '../store/slices/products.slice';
 
 
 const ProductDetail = () => {
-  const dispatch = useDispatch()
+
   const { id } = useParams()
   const [detail, setDetail] = useState({})
-  // const productRelated = useSelector((state) => state.product)
 
   useEffect(() => {
 
@@ -32,6 +33,19 @@ const ProductDetail = () => {
   }, [id])
 
 
+  //Products per category
+  const productRelated = useSelector((state) => state.product);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProductsThunk())
+  }, [dispatch]);
+
+  //unico valor por lo la pueda clasificar  a la info del detalle
+  // console.log(detail?.category); //nombre del tipo de producto
+
+  //clasificacion de info del thunk 
+  // console.log(productRelated[1]?.category?.name); //nombre del tipo del producto, no id
+
   // carrousel miniature 
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -39,7 +53,10 @@ const ProductDetail = () => {
     setActiveIndex(index);
   };
 
-  console.log(detail);
+
+  const similarItems = productRelated?.filter((element) => element?.category?.name === detail?.category);
+
+  const [input,setInput]=useState(1)
 
 
   return (
@@ -48,7 +65,7 @@ const ProductDetail = () => {
 
       {/* title section */}
       <div className="flex justify-content-start  align-items-center mb-5">
-        <div>  Home  </div>
+        <Card.Link as={Link} to='/' style={{ textDecoration: 'none' }}>  Home  </Card.Link>
         <div style={{
           background: "var(--secondary--color)",
           borderRadius: "50%",
@@ -127,9 +144,9 @@ const ProductDetail = () => {
 
                     <div className="quantity-box">
                       <div className="flex">
-                        <button className='buttonCart' > <i className='bx bx-minus' ></i></button>
-                        <div className="value">19</div>
-                        <button className='buttonCart' variant="primary" ><i className='bx bx-plus'></i></button>
+                        <button className='buttonCart' > <i className='bx bx-minus' onClick={()=>setInput( input<=1? 1: input-1)} ></i></button>
+                        <div className="value">{input}</div>
+                        <button className='buttonCart' variant="primary" onClick={()=>setInput(input+1)}><i className='bx bx-plus'></i></button>
                       </div>
                     </div>
                   </Col>
@@ -151,14 +168,59 @@ const ProductDetail = () => {
 
       {/* secondary content */}
 
+      <Container className='d-flex flex-wrap col-12 justify-content-around' >
+
+        {
+          similarItems.map((element, index) =>
+
+            <Card
+              as={Link} to={`/products/${element.id}`}
+              key={index}
+              style={{ width: '18rem', textDecoration: 'none' }} className='mx-3 mb-3 d-flex justify-content-start'>
+
+              <Card.Body >
+                <Card.Img className='similarItemsImg similarItemsImg0' variant="top" src={`${element.productImgs[0]}`} />
+                <Card.Img className='similarItemsImg similarItemsImg1' variant="top" src={`${element.productImgs[1]}`} />
+              </Card.Body>
+
+              <hr style={{border: `1px solid rgba(0, 0, 0, 0.175)`}} />
+
+
+              <Card.Body 
+              style={{ color: 'var(--text--color)' }}
+              className='d-flex flex-column'
+              >
+
+                <Card.Title className='mb-3' style={{fontFamily:'Yantramanav,sans-serif'}}>
+                  {element.title}
+                </Card.Title>
+
+                <Card.Text className='mb-1' style={{color:"var(--text--gray)"}}>
+                  Precio
+                </Card.Text>
+
+                <Card.Title style={{fontFamily:'Yantramanav,sans-serif'}}>{element.price}</Card.Title>
+
+                <Button
+                  variant="primary"
+                  style={{borderRadius:'50%', width:'3rem', height:'3rem'}}
+                  className=' align-self-end d-flex justify-content-center  align-items-center'
+                  >
+                  <i className='bx bx-cart'></i>
+                </Button>
+              </Card.Body>
+            </Card>)
+        }
+
+      </Container>
 
 
 
+    </Container >
 
 
 
-
-    </Container>)
+  )
 
 
 }
