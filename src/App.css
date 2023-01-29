@@ -1,3 +1,15 @@
+/* loader */
+
+.loader-overlay{
+  position: absolute;
+  z-index: 5;
+  background-color: aqua;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 /* carousel detail */
 
 .carousel-indicators {
@@ -27,7 +39,6 @@
   align-items: center;
   width: 1.5rem;
   height: 1.5rem;
-
 }
 
 .carousel-control-next-icon::before {

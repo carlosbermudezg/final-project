@@ -17,7 +17,7 @@ const ProductDetail = () => {
 
   const { id } = useParams()
   const [detail, setDetail] = useState({})
-
+ 
   useEffect(() => {
 
     dispatch(setIsLoading(true))
@@ -31,6 +31,7 @@ const ProductDetail = () => {
       .finally(() => dispatch(setIsLoading(false)))
 
   }, [id])
+
 
 
   //Products per category
@@ -156,12 +157,10 @@ const ProductDetail = () => {
               </Container>
 
 
-
               <Button variant="primary" className='w-100 buttonAddCart' >Add to cart <i className='bx bx-cart'></i></Button>
 
             </Card.Body>
           </Card>
-
 
         </Col>
       </Row>
