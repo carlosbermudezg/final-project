@@ -25,6 +25,17 @@ export const productSlice = createSlice({
   .finally( () => dispatch(setIsLoading(false)))
  }
 
+ export const getFilterProducts =(e) =>  (dispatch) => {
+
+  dispatch(setIsLoading(true))
+
+  axios
+  .get(`https://e-commerce-api.academlo.tech/api/v1/products`)
+  .then(resp => dispatch(setProduct(resp.data.data.products.filter(product => product.title.toLowerCase().includes(e)))))
+  .catch(error => console.log(error))
+  .finally( () => dispatch(setIsLoading(false)))
+ }
+
  export const filterCategoriesThunk =(id) =>  (dispatch) => {
   dispatch(setIsLoading(true))
   axios

@@ -1,29 +1,40 @@
-import React, 
-{ useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import AlertDismissibleExample from '../components/AlertError';
+import { useState } from 'react'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import axios from 'axios'
+import { Link, useNavigate } from 'react-router-dom'
+import AlertDismissibleExample from '../components/AlertError'
+import { useEffect } from 'react'
 
 const Login = () => {
 
-const [email, setEmail] = useState("")
-const [password, setPassword]= useState("")
-const [alert, setAlert] = useState(false)
-const navigate = useNavigate()
+  const user = localStorage.getItem('user')
+  const token = localStorage.getItem('token')
 
-const handleSubmit =(e) => {
-  e.preventDefault()
- const data = {
-  email: email,
-  password: password
- }
+  useEffect(() => {
+    if(user && token){
+      navigate('/')
+    } 
+  }, [])
+
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword]= useState("")
+  const [alert, setAlert] = useState(false)
+  const navigate = useNavigate()
+
+  const handleSubmit =(e) => {
+    e.preventDefault()
+  const data = {
+    email: email,
+    password: password
+  }
 
   axios.post(`https://e-commerce-api.academlo.tech/api/v1/users/login`, data)
   .then(resp => {
-    console.log(resp);
-    localStorage.setItem("token", resp.data.data.token)
+    console.log(resp)
+    localStorage.setItem('token', resp.data.data.token)
+    localStorage.setItem('user', resp.data.data.user.firstName)
     navigate("/")
   })
   .catch(error =>{
@@ -34,10 +45,10 @@ const handleSubmit =(e) => {
 }
 
   return (
-
-    <>
-        <Form onSubmit={(e) => handleSubmit(e)}>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+    <div className='row d-flex justify-content-center'>
+      <div className='col-sm-9 col-md-5 col-12'>
+      <Form onSubmit={(e) => handleSubmit(e)}>
+            <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control type="email" placeholder="Enter email"
                onChange={(e)=> setEmail(e.target.value)}
@@ -52,20 +63,19 @@ const handleSubmit =(e) => {
               <Form.Control type="password" placeholder="Password"
                 onChange={(e)=> setPassword(e.target.value)} />
             </Form.Group>
-           <Button variant="primary" type="submit">
-            Submit
+            <Form.Text id="passwordHelpBlock" muted>
+              Don´t have an account yet? <Link to={'/register'} >Register</Link>
+            </Form.Text>
+           <Button variant="primary" type="submit" className='col-12'>
+            Log In
           </Button>
-
-
         </Form>
-
         <AlertDismissibleExample
         isVisible={alert}
         dismiss={() => setAlert(false)}
         />
-      
-     </>
-  );
-};
-
-export default Login;
+      </div>
+     </div>
+  )
+}
+export default Login

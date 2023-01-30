@@ -16,12 +16,12 @@
 
 body{
   background-color: var(--primary--color);
-  color: var(--text--color);
-  font-family: Yantramanav,sans-serif;
-  font-size: 1rem;
 }
+<<<<<<< HEAD
 
 h1, h2, h3 ,h4,h5,h6 {
   font-family: Yantramanav,sans-serif;
 }
 
+=======
+>>>>>>> 5580b64e465dd3d1bfb583bc03b70e81b6219916
