@@ -21,7 +21,7 @@ const ProductDetail = () => {
   useEffect(() => {
 
     dispatch(setIsLoading(true))
-
+                                                                                 
     axios
       .get(`https://e-commerce-api.academlo.tech/api/v1/products/${id}`)
       .then(resp => {
