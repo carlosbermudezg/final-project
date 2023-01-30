@@ -17,9 +17,7 @@ export const productSlice = createSlice({
 // export el thunk en home
 // el dispatch lleva el Loader
  export const getProductsThunk =() =>  (dispatch) => {
-
   dispatch(setIsLoading(true))
-
   axios
   .get(`https://e-commerce-api.academlo.tech/api/v1/products`)
   .then(resp => dispatch(setProduct(resp.data.data.products)))
@@ -28,6 +26,8 @@ export const productSlice = createSlice({
  }
 
  export const getFilterProducts =(e) =>  (dispatch) => {
+
+
 
   dispatch(setIsLoading(true))
 
@@ -40,8 +40,18 @@ export const productSlice = createSlice({
 
  export const filterCategoriesThunk =(id) =>  (dispatch) => {
 
+
   dispatch(setIsLoading(true))
 
+  axios
+  .get(`https://e-commerce-api.academlo.tech/api/v1/products`)
+  .then(resp => dispatch(setProduct(resp.data.data.products.filter(product => product.title.toLowerCase().includes(e)))))
+  .catch(error => console.log(error))
+  .finally( () => dispatch(setIsLoading(false)))
+ }
+
+ export const filterCategoriesThunk =(id) =>  (dispatch) => {
+  dispatch(setIsLoading(true))
   axios
   .get(`https://e-commerce-api.academlo.tech/api/v1/products/?category=${id}`)
   .then(resp => dispatch(setProduct(resp.data.data.products)))
