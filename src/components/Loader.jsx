@@ -2,8 +2,10 @@ import React from 'react';
 
 const Loader = () => {
   return (
-    <div className='loader-overlay' >
-        <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div className='loading' >
+       <div className='loading-wait'>
+        <i class='bx bx-cart-download shopping-car '></i>
+       </div>
     </div>
   );
 };

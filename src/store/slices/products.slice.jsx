@@ -24,7 +24,11 @@ export const productSlice = createSlice({
   .get(`https://e-commerce-api.academlo.tech/api/v1/products`)
   .then(resp => dispatch(setProduct(resp.data.data.products)))
   .catch(error => console.log(error))
-  .finally( () => dispatch(setIsLoading(false)))
+  .finally( () =>{
+    setTimeout(() => {
+      dispatch(setIsLoading(false))
+    }, 1500);
+  })
  }
 
  export const filterCategoriesThunk =(id) =>  (dispatch) => {
@@ -35,7 +39,11 @@ export const productSlice = createSlice({
   .get(`https://e-commerce-api.academlo.tech/api/v1/products/?category=${id}`)
   .then(resp => dispatch(setProduct(resp.data.data.products)))
   .catch(error => console.log(error))
-  .finally( () => dispatch(setIsLoading(false)))
+  .finally( () => {
+    setTimeout(() => {
+      dispatch(setIsLoading(false))
+    }, 1500);
+  })
  }
 
 export const { setProduct } = productSlice.actions;

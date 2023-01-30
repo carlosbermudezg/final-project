@@ -35,7 +35,7 @@ const handleSubmit =(e) => {
 
   return (
 
-    <>
+    <div className='content-login'>
         <Form onSubmit={(e) => handleSubmit(e)}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
@@ -64,7 +64,7 @@ const handleSubmit =(e) => {
         dismiss={() => setAlert(false)}
         />
       
-     </>
+     </div>
   );
 };
 

@@ -27,7 +27,11 @@ const ProductDetail = () => {
         setDetail(resp.data.data.product)
       })
       .catch(error => console.log(error))
-      .finally(() => dispatch(setIsLoading(false)))
+      .finally(() => {
+        setTimeout(() => {
+          dispatch(setIsLoading(false))
+        }, 1500);
+      })
 
   }, [id])
 
@@ -44,7 +48,7 @@ const ProductDetail = () => {
 
   return (
 
-    <Container className='col-11 conteiner'  >
+    <Container className='col-11 conteiner content-details'  >
 
       {/* title section */}
       <div className="flex justify-content-start  align-items-center mb-5">

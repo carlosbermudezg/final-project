@@ -1,3 +1,8 @@
+
+.content-login, .content-purchase, .content-details 
+{
+  margin-top: 15%;
+}
 /* carousel detail */
 
 .carousel-indicators {
@@ -137,3 +142,249 @@
   border-radius: 0;
   line-height: 1;
 }
+
+/* screen of wait */
+.loading{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background:linear-gradient(#FFFFFF, grey) ;
+  z-index: 3;
+}
+
+.shopping-car{
+  position: relative;
+  font-size: 100px;
+  color: black;
+  animation-name: moveCar;
+  animation-duration: 2s;
+  animation-direction: normal;
+  animation-timing-function:ease;
+  animation-iteration-count: infinite;
+}
+
+@keyframes moveCar {
+  0%{
+    color: black;
+    top: 0
+  }
+  50%{
+    color:black;
+    top: 45%;
+    left: 0;
+    right: 0;
+  }
+  65%{
+    top: 35%;
+  }
+  75%{
+    top: 45%;
+    color: black;
+    left: 0;
+    right: 0;
+  }
+  80%{
+    top: 38%;
+  }
+  85%{
+    color: black;
+    top: 45%;
+    left: 0;
+    right: 0;
+  }
+  90%{
+    top: 40%;
+  }
+  95%{
+    color: black;
+    top: 45%;
+    left: 0;
+    right: 0;
+  }
+  97%{
+    top: 42%;
+  }
+  100%{
+    color: black;
+    top: 45%;
+    left: 0;
+    right: 0;
+  }
+}
+
+/* navbar */
+
+.navbar-all{
+  z-index: 90;
+  top: 0;
+  position:fixed;
+  height: 70px;
+  width: 100%;
+  padding:0 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.navbar-title{
+  position: relative;
+  animation-name: rotation;
+  animation-duration: 5s;
+  animation-direction: normal;
+  animation-timing-function:ease;
+  animation-iteration-count: infinite;
+}
+.navbar-title:hover{
+  animation-play-state: paused;
+}
+.navbar-bags{
+  font-size: 25px;
+  position: relative;
+  animation-name: moveBag;
+  animation-duration: 5s;
+  animation-direction: normal;
+  animation-timing-function:ease;
+  animation-iteration-count: infinite;
+}
+@keyframes rotation{
+	from {
+		-webkit-transform: rotate(0deg);
+        transform: rotateY(0deg);
+        color: whitesmoke ;
+	}
+  50%{
+		-webkit-transform: rotate(180deg);
+        transform: rotateY(180deg);
+        color: lightcoral;
+	} 
+	to {
+		-webkit-transform: rotate(360deg);
+        transform: rotateY(360deg);
+		}
+}
+@keyframes moveBag {
+  0%{
+    color: white;
+  }
+  50%{
+    color: lightcoral;
+  }
+  100%{
+  }
+}
+.content-detail-navbar{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 180px;
+  height: 100%;
+}
+.link-login{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100px;
+  border-right: 1px solid white;
+  border-left: 1px solid white;
+  text-decoration: none;
+}
+.icon-user-navbar{
+  color: var(--secondary--color);
+  font-size: 30px;
+}
+.icon-user-navbar:hover{
+  color:lightgray;
+}
+.login-navbar{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  animation-name: fall;
+  animation-duration: 2s;
+  animation-delay: 1s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+}
+@keyframes fall{
+  0%{
+    top: 0;
+
+  }
+  50%{
+    top: 15px;
+  }
+  100%{
+    top: 0;
+  }
+}
+.purchase-navbar{
+  color: var(--secondary--color);
+  position: relative;
+  animation-name: fallPurchase;
+  animation-duration: 2s;
+  animation-delay: 1.4s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+}
+.link-purchase{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100px;
+  border-right: 1px solid white;
+  text-decoration: none;
+}
+@keyframes fallPurchase{
+  0%{
+    top: 0;
+  }
+  50%{
+    top: 20px;
+  }
+  100%{
+    top: 0;
+
+  }
+}
+.car-navbar{
+  position: relative;
+  animation-name: fallcar;
+  animation-duration: 2s;
+  animation-delay: 1.8s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+}
+.link-car{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100px;
+  border-right: 1px solid white;
+  text-decoration: none;
+}
+.icon-car-navbar{
+  font-size: 30px;
+  color: var(--secondary--color);
+}
+.icon-car-navbar:hover{
+ color:lightgray;
+}
+@keyframes fallcar{
+  0%{
+    top: 0;
+    
+
+  }
+  50%{
+    top: 25px;
+  }
+  100%{
+    top: 0;
+  }
+}
+
