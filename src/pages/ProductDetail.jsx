@@ -21,7 +21,7 @@ const ProductDetail = () => {
   useEffect(() => {
 
     dispatch(setIsLoading(true))
-                                                                                 
+
     axios
       .get(`https://e-commerce-api.academlo.tech/api/v1/products/${id}`)
       .then(resp => {
@@ -56,7 +56,23 @@ const ProductDetail = () => {
 
   const similarItems = productRelated?.filter((element) => element?.category?.name === detail?.category);
 
-  const [input,setInput]=useState(1)
+  const [input, setInput] = useState(1);
+
+
+  const handleSubmit = () => {
+
+    const data = {
+      id,
+      quantity: input
+    }
+
+    axios
+      .post('https://e-commerce-api.academlo.tech/api/v1/cart', data)
+      .then((resp)=>console.log(resp))
+      .catch((error)=>console.log(error))
+
+    console.log(data);
+  }
 
 
   return (
@@ -144,9 +160,9 @@ const ProductDetail = () => {
 
                     <div className="quantity-box">
                       <div className="flex">
-                        <button className='buttonCart' > <i className='bx bx-minus' onClick={()=>setInput( input<=1? 1: input-1)} ></i></button>
+                        <button className='buttonCart' > <i className='bx bx-minus' onClick={() => setInput(input <= 1 ? 1 : input - 1)} ></i></button>
                         <div className="value">{input}</div>
-                        <button className='buttonCart' variant="primary" onClick={()=>setInput(input+1)}><i className='bx bx-plus'></i></button>
+                        <button className='buttonCart' variant="primary" onClick={() => setInput(input + 1)}><i className='bx bx-plus'></i></button>
                       </div>
                     </div>
                   </Col>
@@ -157,7 +173,7 @@ const ProductDetail = () => {
 
 
 
-              <Button variant="primary" className='w-100 buttonAddCart' >Add to cart <i className='bx bx-cart'></i></Button>
+              <Button onClick={() => handleSubmit()} variant="primary" className='w-100 buttonAddCart' >Add to cart <i className='bx bx-cart'></i></Button>
 
             </Card.Body>
           </Card>
@@ -183,29 +199,29 @@ const ProductDetail = () => {
                 <Card.Img className='similarItemsImg similarItemsImg1' variant="top" src={`${element.productImgs[1]}`} />
               </Card.Body>
 
-              <hr style={{border: `1px solid rgba(0, 0, 0, 0.175)`}} />
+              <hr style={{ border: `1px solid rgba(0, 0, 0, 0.175)` }} />
 
 
-              <Card.Body 
-              style={{ color: 'var(--text--color)' }}
-              className='d-flex flex-column'
+              <Card.Body
+                style={{ color: 'var(--text--color)' }}
+                className='d-flex flex-column'
               >
 
-                <Card.Title className='mb-3' style={{fontFamily:'Yantramanav,sans-serif'}}>
+                <Card.Title className='mb-3' style={{ fontFamily: 'Yantramanav,sans-serif' }}>
                   {element.title}
                 </Card.Title>
 
-                <Card.Text className='mb-1' style={{color:"var(--text--gray)"}}>
+                <Card.Text className='mb-1' style={{ color: "var(--text--gray)" }}>
                   Precio
                 </Card.Text>
 
-                <Card.Title style={{fontFamily:'Yantramanav,sans-serif'}}>{element.price}</Card.Title>
+                <Card.Title style={{ fontFamily: 'Yantramanav,sans-serif' }}>{element.price}</Card.Title>
 
                 <Button
                   variant="primary"
-                  style={{borderRadius:'50%', width:'3rem', height:'3rem'}}
+                  style={{ borderRadius: '50%', width: '3rem', height: '3rem' }}
                   className=' align-self-end d-flex justify-content-center  align-items-center'
-                  >
+                >
                   <i className='bx bx-cart'></i>
                 </Button>
               </Card.Body>
